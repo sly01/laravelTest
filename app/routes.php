@@ -11,8 +11,20 @@
 |
 */
 
-Route::get('/', function()
-{
+Route::pattern('id','[0-9]+');
+Route::pattern('sef', '[a-z0-9-]+');
+
+Route::get('/yazi/{id}/{sef}.html',array(
+		'as' => 'yazi',
+		'uses' => 'SistemController@yazi'
+		
 	//return View::make('hello');
-	return "Hello World";
+	
+));
+
+Route::get('/bulunamadi', function(){
+	return Redirect::route('yazi', array('id' => '01','sef' => 'aerkoc'));
 });
+
+Route::get('/', 'SistemController@anasayfa');
+Route::get('/bladesistem', 'SistemController@blade');
