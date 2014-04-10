@@ -17,9 +17,9 @@ Route::pattern('sef', '[a-z0-9-]+');
 Route::get('/yazi/{id}/{sef}.html',array(
 		'as' => 'yazi',
 		'uses' => 'SistemController@yazi'
-		
+
 	//return View::make('hello');
-	
+
 ));
 
 Route::get('/bulunamadi', function(){
@@ -28,3 +28,21 @@ Route::get('/bulunamadi', function(){
 
 Route::get('/', 'SistemController@anasayfa');
 Route::get('/bladesistem', 'SistemController@blade');
+Route::get('users',function(){
+    return 'Users!';
+});
+
+Route::get('/save', function(){
+    $yazi = new Yazilar(array(
+        'baslik' => 'Deneme baslik',
+        'sef' => 'Deneme sef',
+        'icerik' => 'Deneme icerik'
+    ));
+    $yazi->save();
+});
+
+Route::get('/update',function(){
+    $yazi = Yazilar::find(1);
+    $yazi->icerik = 'xxxxxxxx';
+    $yazi->save();
+});
