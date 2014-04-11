@@ -10,7 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+Route::controller('users', 'UsersController');
 Route::pattern('id','[0-9]+');
 Route::pattern('sef', '[a-z0-9-]+');
 
@@ -26,11 +26,11 @@ Route::get('/bulunamadi', function(){
 	return Redirect::route('yazi', array('id' => '01','sef' => 'aerkoc'));
 });
 
-Route::get('/', 'SistemController@anasayfa');
+//Route::get('/', 'SistemController@anasayfa');
 Route::get('/bladesistem', 'SistemController@blade');
-Route::get('users',function(){
-    return 'Users!';
-});
+//Route::get('users',function(){
+//    return 'Users!';
+//});
 
 Route::get('/save', function(){
     $yazi = new Yazilar(array(
@@ -46,3 +46,12 @@ Route::get('/update',function(){
     $yazi->icerik = 'xxxxxxxx';
     $yazi->save();
 });
+
+Route::get('login', 'SessionsController@create');
+
+Route::get('logout','SessionsController@destroy');
+
+Route::resource('sessions', 'SessionsController');
+
+
+
